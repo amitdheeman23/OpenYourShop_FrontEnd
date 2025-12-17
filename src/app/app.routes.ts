@@ -7,6 +7,7 @@ export const routes: Routes = [
   loadComponent: () =>
     import('./components/auth_components/auth/auth')
       .then(m => m.Auth)
-}
+},
+{path:'forgot',loadComponent:()=>import('./components/auth_components/forgot/forgot').then(forg=>forg.Forgot)}
 
 ];
