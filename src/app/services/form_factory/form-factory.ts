@@ -35,9 +35,23 @@ export class FormFactory {
     return this.fb.group(group);
   }
 
-  private getDefaultValue(field: FormsFieldsConfig): any {
-    if (field.type === 'checkbox' || field.type === 'multi-select') return [];
-    if (field.type === 'file') return null;
-    return '';
+private getDefaultValue(field: FormsFieldsConfig): any {
+
+  if (field.type === 'checkbox' && field.key === 'rememberMe') {
+    return false;
   }
+
+  if (field.type === 'checkbox' || field.type === 'multi-select') {
+    return [];
+  }
+
+  if (field.type === 'file') {
+    return null;
+  }
+
+  return '';
+}
+
+
+
 }

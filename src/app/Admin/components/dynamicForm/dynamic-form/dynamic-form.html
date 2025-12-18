@@ -1,0 +1,205 @@
+<form [formGroup]="currentForm" (ngSubmit)="isWizard ? next() : submit()">
+
+    <!-- ================= TITLE ================= -->
+    <h4 class="text-center mb-3">
+        {{ currentStep.title }}
+    </h4>
+
+    <!-- ================= FIELDS ================= -->
+    @for (field of currentStep.fields; track field.key) {
+
+    <!-- ---------- NORMAL FIELDS ---------- -->
+    @if (field.type !== 'array') {
+
+    <div class="mb-3">
+
+        <label class="form-label">
+            {{ field.label }}
+            @if (field.validators?.length) {
+            <span class="text-danger">*</span>
+            }
+        </label>
+
+        <!-- TEXT -->
+        @if (field.type === 'text') {
+        <input type="text" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.key"
+            autocomplete="off" />
+        }
+
+        <!-- EMAIL -->
+        @if (field.type === 'email') {
+        <input type="email" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.key"
+            autocomplete="off" />
+        }
+
+        <!-- PASSWORD -->
+        @if (field.type === 'password') {
+        <input type="password" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.key" />
+        }
+
+        <!-- NUMBER -->
+        @if (field.type === 'number') {
+        <input type="number" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.key" />
+        }
+
+        <!-- TEXTAREA -->
+        @if (field.type === 'textarea') {
+        <textarea rows="3" class="form-control" [placeholder]="field.placeholder" [formControlName]="field.key">
+          </textarea>
+        }
+
+        <!-- SELECT -->
+        @if (field.type === 'select') {
+        <select class="form-select" [formControlName]="field.key">
+            <option value="">Select {{ field.label }}</option>
+            @for (opt of field.options ?? []; track opt.value) {
+            <option [value]="opt.value">{{ opt.label }}</option>
+            }
+        </select>
+        }
+
+        <!-- MULTI SELECT -->
+        @if (field.type === 'multi-select') {
+        <select multiple class="form-select" [formControlName]="field.key">
+            @for (opt of field.options ?? []; track opt.value) {
+            <option [value]="opt.value">{{ opt.label }}</option>
+            }
+        </select>
+        }
+
+        <!-- CHECKBOX -->
+        @if (field.type === 'checkbox') {
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" [formControlName]="field.key" />
+            <label class="form-check-label">
+                {{ field.placeholder }}
+            </label>
+        </div>
+        }
+
+        <!-- RADIO -->
+        @if (field.type === 'radio') {
+        @for (opt of field.options ?? []; track opt.value) {
+        <div class="form-check">
+            <input type="radio" class="form-check-input" [value]="opt.value" [formControlName]="field.key" />
+            <label class="form-check-label">
+                {{ opt.label }}
+            </label>
+        </div>
+        }
+        }
+
+        <!-- DATE -->
+        @if (field.type === 'date') {
+        <input type="date" class="form-control" [formControlName]="field.key" />
+        }
+
+        <!-- FILE -->
+        @if (field.type === 'file') {
+        <input type="file" class="form-control" (change)="onFileChange($event, field.key)" />
+        }
+
+        <!-- ERRORS -->
+        @if (
+        currentForm.get(field.key)?.touched &&
+        currentForm.get(field.key)?.invalid
+        ) {
+        <div class="text-danger mt-1">
+
+            @if (currentForm.get(field.key)?.errors?.['required']) {
+            <small>{{ field.label }} is required</small>
+            }
+
+            @if (currentForm.get(field.key)?.errors?.['email']) {
+            <small>Invalid email format</small>
+            }
+
+            @if (currentForm.get(field.key)?.errors?.['minlength']) {
+            <small>Minimum length not met</small>
+            }
+
+        </div>
+        }
+
+    </div>
+    }
+
+    <!-- ---------- FORM ARRAY ---------- -->
+    @if (field.type === 'array') {
+
+    <div class="mb-3" [formArrayName]="field.key">
+
+        <label class="form-label">{{ field.label }}</label>
+
+        @for (
+        ctrl of getArray(field.key).controls;
+        track i;
+        let i = $index
+        ) {
+
+        <div class="border rounded p-3 mb-2" [formGroupName]="i">
+
+            @for (af of field.arrayFields ?? []; track af.key) {
+
+            <div class="mb-2">
+                <label class="form-label">{{ af.label }}</label>
+
+                <input type="text" class="form-control" [placeholder]="af.placeholder" [formControlName]="af.key" />
+            </div>
+
+            }
+
+        </div>
+        }
+
+        <button type="button" class="btn btn-sm btn-outline-primary"
+            (click)="addArrayItem(field.key, field.arrayFields ?? [])">
+            + Add {{ field.label }}
+        </button>
+
+    </div>
+    }
+
+    }
+
+    <!-- ================= BUTTONS ================= -->
+
+    <!-- SINGLE FORM -->
+    @if (!isWizard) {
+    <button type="submit" class="btn btn-primary w-100" [disabled]="currentForm.invalid">
+        Submit
+    </button>
+    }
+
+    <!-- WIZARD -->
+    @if (isWizard) {
+
+    <div class="d-flex justify-content-between mt-3">
+
+        @if (stepIndex > 0) {
+        <button type="button" class="btn btn-secondary" (click)="back()">
+            Back
+        </button>
+        }
+
+        <!-- NEXT OR SUBMIT -->
+        @if (
+        stepIndex < steps.length - 1 && !isNoNextStep() ) { <!-- NEXT -->
+            <button type="button" class="btn btn-primary w-100" (click)="next()">
+                Next
+            </button>
+
+            } @else {
+
+            <!-- SUBMIT -->
+            <button type="button" class="btn btn-success w-100" (click)="submit()">
+                Submit
+            </button>
+
+            }
+
+    </div>
+    }
+
+
+</form>

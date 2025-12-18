@@ -64,6 +64,13 @@ export const LOGIN_WIZARD_STEPS: StepConfig[] = [
 
         validators: [Validators.required],
       },
+         {
+        key: 'rememberMe',
+        label: '',
+        type: 'checkbox',
+        placeholder:'Remember Me',
+        validators: [],
+      },
     ],
   },
   {
@@ -78,4 +85,32 @@ export const LOGIN_WIZARD_STEPS: StepConfig[] = [
       },
     ],
   },
+   {
+    stepNumber: 2,
+    title: 'Registered Email',
+    fields: [
+      {
+        key: 'email',
+        type: 'text',
+        label: 'Enter registered email',
+        validators: [Validators.required],
+      },
+    ],
+  },
 ];
+
+export const FORGOT_FORM:StepConfig[]=[
+  {
+    stepNumber:1,
+    title:'Forgot Password',
+    fields:[
+      {
+        key:'email',
+        label:'Register email',
+        type:'email',
+        placeholder:'Enter register emai',
+        validators:[Validators.required]
+      }
+    ]
+  }
+]
