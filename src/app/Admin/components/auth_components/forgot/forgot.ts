@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { DynamicForm } from '../../dynamicForm/dynamic-form/dynamic-form';
 import { FormGroup } from '@angular/forms';
 import { FormFactory } from '../../../../services/form_factory/form-factory';
-import { FORGOT_FORM } from '../../../../formsConfigs/formsConfigs';
+import { DynamicForm } from '../../dynamicForm/dynamic-form/dynamic-form';
+import { FORGOT_FORM } from '../../../../config/authformsConfigs/forgotFormConfig';
 
 @Component({
   selector: 'app-forgot',

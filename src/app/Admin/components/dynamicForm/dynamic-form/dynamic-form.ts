@@ -6,28 +6,27 @@ import { FormFactory } from '../../../../services/form_factory/form-factory';
 
 @Component({
   selector: 'app-dynamic-form',
-  imports: [ReactiveFormsModule,CommonModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './dynamic-form.html',
-  styleUrl: './dynamic-form.scss',
 })
 export class DynamicForm implements OnInit {
-  @Input() steps: StepConfig[] = [];   // 🔥 ALWAYS ARRAY
+
+  @Input() steps: StepConfig[] = [];
+  @Input() defaultCol = 12;
+
   @Output() submitForm = new EventEmitter<any>();
 
   forms: FormGroup[] = [];
   stepIndex = 0;
-noNextSteps: string[] = ['Login', 'Sign In', 'Email Verification'];
 
-  constructor(private formFactory: FormFactory) {}
+  rows: FormsFieldsConfig[][] = [];
+
+  constructor(private factory: FormFactory) {}
 
   ngOnInit(): void {
-    this.forms = this.steps.map(step =>
-      this.formFactory.createForm(step)
-    );
-  }
-
-  get isWizard(): boolean {
-    return this.steps.length > 1;
+    this.forms = this.steps.map(step => this.factory.createForm(step));
+    this.buildRows();
   }
 
   get currentStep(): StepConfig {
@@ -38,11 +37,57 @@ noNextSteps: string[] = ['Login', 'Sign In', 'Email Verification'];
     return this.forms[this.stepIndex];
   }
 
-  /* ---------- navigation ---------- */
+  /* ===== ROW BUILDER (MAIN MAGIC) ===== */
+
+  buildRows() {
+    this.rows = [];
+    let row: FormsFieldsConfig[] = [];
+    let colCount = 0;
+
+    this.currentStep.fields.forEach(field => {
+      const col = field.col ?? this.defaultCol;
+
+      if (field.forceNewRow || colCount + col > 12) {
+        if (row.length) this.rows.push(row);
+        row = [];
+        colCount = 0;
+      }
+
+      row.push({ ...field, col });
+      colCount += col;
+
+      if (colCount === 12) {
+        this.rows.push(row);
+        row = [];
+        colCount = 0;
+      }
+    });
+
+    if (row.length) this.rows.push(row);
+  }
+
+  /* ===== FORM ARRAY ===== */
+
+  getArray(key: string): FormArray {
+    return this.currentForm.get(key) as FormArray;
+  }
+
+  addArrayItem(key: string, fields: FormsFieldsConfig[]) {
+    this.getArray(key).push(this.factory.createArrayGroup(fields));
+  }
+
+  /* ===== SUBMIT ===== */
+
+  submit() {
+    const payload: any = {};
+    this.forms.forEach(f => Object.assign(payload, f.value));
+    this.submitForm.emit(payload);
+  }
 
   next() {
     if (this.currentForm.valid) {
       this.stepIndex++;
+      this.buildRows();
     } else {
       this.currentForm.markAllAsTouched();
     }
@@ -50,46 +95,23 @@ noNextSteps: string[] = ['Login', 'Sign In', 'Email Verification'];
 
   back() {
     this.stepIndex--;
-  }
-submit() {
-
-  let finalData: any = {};
-
-  this.forms.forEach(form => {
-    Object.keys(form.value).forEach(key => {
-      const value = form.value[key];
-
-      if (value !== null && value !== '' && value !== undefined) {
-        finalData[key] = value;
-      }
-    });
-  });
-
-  this.submitForm.emit(finalData);
-}
-
-
-  /* ---------- FormArray helpers ---------- */
-
-  getArray(key: string): FormArray {
-    return this.currentForm.get(key) as FormArray;
+    this.buildRows();
   }
 
-  addArrayItem(key: string, fields: FormsFieldsConfig[] = []) {
-    this.getArray(key).push(
-      (this.formFactory as any).createArrayGroup(fields)
-    );
+  /* ===== RESPONSIVE CLASS ===== */
+
+  getColClass(field: any): string {
+    if (field.responsive) {
+      return `
+        col-${field.responsive.sm ?? 12}
+        col-md-${field.responsive.md ?? field.col}
+        col-lg-${field.responsive.lg ?? field.col}
+        col-xl-${field.responsive.xl ?? field.col}
+      `;
+    }
+    return `col-md-${field.col}`;
   }
 
-  /* ---------- File ---------- */
-
-  onFileChange(event: Event, controlName: string): void {
-    const input = event.target as HTMLInputElement | null;
-    if (!input?.files?.length) return;
-    this.currentForm.get(controlName)?.setValue(input.files[0]);
-  }
-  isNoNextStep(): boolean {
-  return this.noNextSteps.includes(this.currentStep.title);
-}
-
+  trackRow = (_: number, row: any[]) => row;
+  trackField = (_: number, field: any) => field.key;
 }

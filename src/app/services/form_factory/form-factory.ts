@@ -1,57 +1,30 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { FormsFieldsConfig, StepConfig } from '../../interfaces/interfaces';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class FormFactory {
-   constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) {}
 
   createForm(step: StepConfig): FormGroup {
     const group: any = {};
 
     step.fields.forEach(field => {
       if (field.type === 'array') {
-        group[field.key] = this.fb.array([
-          this.createArrayGroup(field.arrayFields || [])
-        ]);
+        group[field.key] = this.fb.array([]);
       } else {
-        group[field.key] = [
-          this.getDefaultValue(field),
-          field.validators || []
-        ];
+        group[field.key] = ['', field.validators || []];
       }
     });
 
     return this.fb.group(group);
   }
 
-  private createArrayGroup(fields: FormsFieldsConfig[]): FormGroup {
+  createArrayGroup(fields: FormsFieldsConfig[]): FormGroup {
     const group: any = {};
     fields.forEach(f => {
-      group[f.key] = [this.getDefaultValue(f), f.validators || []];
+      group[f.key] = ['', f.validators || []];
     });
     return this.fb.group(group);
   }
-
-private getDefaultValue(field: FormsFieldsConfig): any {
-
-  if (field.type === 'checkbox' && field.key === 'rememberMe') {
-    return false;
-  }
-
-  if (field.type === 'checkbox' || field.type === 'multi-select') {
-    return [];
-  }
-
-  if (field.type === 'file') {
-    return null;
-  }
-
-  return '';
-}
-
-
-
 }

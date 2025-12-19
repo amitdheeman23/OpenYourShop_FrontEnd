@@ -1,0 +1,238 @@
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Buyer</h1>
+            </div>
+
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<div class="col-md-12">
+    <div class="card">
+        <!-- ================= TABS HEADER ================= -->
+        <div class="card-header p-2">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#overview">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#profile">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#orders">Orders</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#activity">Activity</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#settings">Settings</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ================= TAB CONTENT ================= -->
+        <div class="card-body">
+            <div class="tab-content">
+
+                <!-- ================= OVERVIEW ================= -->
+                <div class="active tab-pane" id="overview">
+                    <div class="row">
+
+                        <div class="col-md-4">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3>24</h3>
+                                    <p>Total Orders</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3>₹45,000</h3>
+                                    <p>Total Spend</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-rupee-sign"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3>3</h3>
+                                    <p>Cancelled Orders</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ================= BUYER PROFILE ================= -->
+                <div class="tab-pane" id="profile">
+                    <div class="row">
+
+                        <!-- PROFILE CARD -->
+                        <div class="col-md-4">
+                            <div class="card card-primary card-outline">
+                                <div class="card-body box-profile">
+
+                                    <div class="text-center">
+                                        <img class="profile-user-img img-fluid img-circle"
+                                            src="assets/img/default-user.png" alt="Buyer profile picture">
+                                    </div>
+
+                                    <h3 class="profile-username text-center mt-2">
+                                        Amit Sharma
+                                    </h3>
+
+                                    <p class="text-muted text-center">
+                                        Buyer Account
+                                    </p>
+
+                                    <div class="text-center mb-3">
+                                        <span class="badge badge-success">Active</span>
+                                    </div>
+
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Buyer ID</b>
+                                            <span class="float-right">#BUY-1023</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Email</b>
+                                            <span class="float-right">amit@gmail.com</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Mobile</b>
+                                            <span class="float-right">+91 98765 43210</span>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Joined On</b>
+                                            <span class="float-right">12 Sep 2025</span>
+                                        </li>
+                                    </ul>
+
+                                    <div class="d-flex justify-content-between">
+                                        <button class="btn btn-sm btn-warning">
+                                            <i class="fas fa-edit"></i> Edit
+                                        </button>
+                                        <button class="btn btn-sm btn-danger">
+                                            <i class="fas fa-ban"></i> Block
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ADDRESS + EXTRA INFO -->
+                        <div class="col-md-8">
+
+                            <div class="card card-outline card-secondary">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-map-marker-alt mr-1"></i>
+                                        Address
+                                    </h3>
+                                </div>
+
+                                <div class="card-body">
+                                    <p class="mb-1">MG Road, Sector 29</p>
+                                    <p class="mb-1">Gurgaon, Haryana</p>
+                                    <p>India - 122001</p>
+                                </div>
+                            </div>
+
+                            <div class="card card-outline card-info">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="fas fa-info-circle mr-1"></i>
+                                        Buyer Notes
+                                    </h3>
+                                </div>
+                                <div class="card-body">
+                                    <p class="text-muted">
+                                        Regular customer. Mostly orders electronics & fashion items.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- ================= ORDERS ================= -->
+                <div class="tab-pane" id="orders">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Order ID</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>ORD-12345</td>
+                                <td>₹3,200</td>
+                                <td><span class="badge badge-success">Delivered</span></td>
+                                <td>10 Sep 2025</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ================= ACTIVITY ================= -->
+                <div class="tab-pane" id="activity">
+                    <p class="text-muted">
+                        Login history, device logs, order actions will appear here.
+                    </p>
+                </div>
+
+                <!-- ================= SETTINGS ================= -->
+                <div class="tab-pane" id="settings">
+                    <form class="form-horizontal">
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Name</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" value="Amit Sharma">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Email</label>
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" value="amit@gmail.com">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="offset-sm-2 col-sm-10">
+                                <button class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

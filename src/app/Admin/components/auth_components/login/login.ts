@@ -1,31 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { DynamicForm } from '../../dynamicForm/dynamic-form/dynamic-form';
-import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LOGIN_WIZARD_STEPS } from '../../../../formsConfigs/formsConfigs';
+import { DynamicForm } from '../../dynamicForm/dynamic-form/dynamic-form';
+import { LOGIN_FORM } from '../../../../config/authformsConfigs/loginFormConfig';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [DynamicForm],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
-export class Login implements OnInit{
+export class Login implements OnInit {
 
-StepConfig = LOGIN_WIZARD_STEPS;
-  form!: FormGroup;
+  steps = LOGIN_FORM;
 
-  constructor(
-    private router:Router) {
-  }
+  constructor(private router: Router) {}
+
   ngOnInit(): void {
-    console.log('StepConfig===',this.StepConfig);
-    
+    console.log('StepConfig ===>', this.steps);
   }
 
   login(data: any): void {
     console.log('LOGIN DATA 👉', data);
-    this.router.navigate(['/home'])
-    // yahan API call aayegi
+
+    // API call yahan aayegi
+    this.router.navigate(['/home']);
   }
 }

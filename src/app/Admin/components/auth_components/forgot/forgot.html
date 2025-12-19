@@ -4,7 +4,7 @@
       <div class="card shadow">
         <!-- <h3 class="text-center p-4">{{StepConfig[0].title}}</h3> -->
         <div class="card-body p-4">
-          <app-dynamic-form [steps]="StepConfig" (submitForm)="forGot($event)">
+          <app-dynamic-form [steps]="StepConfig" [defaultCol]="12" (submitForm)="forGot($event)">
           </app-dynamic-form>
         </div>
       </div>

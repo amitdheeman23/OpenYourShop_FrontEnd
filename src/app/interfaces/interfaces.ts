@@ -5,30 +5,39 @@ export interface FormOption {
   value: any;
 }
 
+export type FieldType =
+  | 'text'
+  | 'email'
+  | 'password'
+  | 'number'
+  | 'textarea'
+  | 'select'
+  | 'checkbox'
+  | 'file'
+  | 'array';
+
+export interface ResponsiveCol {
+  sm?: number;
+  md?: number;
+  lg?: number;
+  xl?: number;
+}
+
 export interface FormsFieldsConfig {
   key: string;
-  type:
-    | 'text'
-    | 'email'
-    | 'password'
-    | 'number'
-    | 'textarea'
-    | 'select'
-    | 'multi-select'
-    | 'checkbox'
-    | 'radio'
-    | 'date'
-    | 'file'
-    | 'array';
-
-  label: string;
+  type: FieldType;
+  label?: string;
   placeholder?: string;
   validators?: ValidatorFn[];
 
-  /* select / radio */
+  /* ===== UI ONLY ===== */
+  col?: number;                 // fallback
+  responsive?: ResponsiveCol;   // 👈 responsive grid
+  forceNewRow?: boolean;
+
   options?: FormOption[];
 
-  /* FormArray */
+  /* ===== FormArray ===== */
   arrayFields?: FormsFieldsConfig[];
 }
 
