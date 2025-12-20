@@ -22,14 +22,14 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () =>
-      import('./Admin/components/auth_components/auth/auth')
+      import('../app/auth_components/auth/auth')
         .then(m => m.Auth),
   },
 
   {
     path: 'forgot',
     loadComponent: () =>
-      import('./Admin/components/auth_components/forgot/forgot')
+      import('../app/auth_components/forgot/forgot')
         .then(forg => forg.Forgot),
   },
 

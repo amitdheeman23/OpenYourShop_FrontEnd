@@ -1,0 +1,10 @@
+.modal-content {
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35) !important;
+  border-radius: 8px;
+}
+
+
+.modal-backdrop.show {
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}

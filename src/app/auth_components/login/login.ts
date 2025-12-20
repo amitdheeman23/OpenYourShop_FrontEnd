@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DynamicForm } from '../../dynamicForm/dynamic-form/dynamic-form';
-import { LOGIN_FORM } from '../../../../config/authformsConfigs/loginFormConfig';
+import { DynamicForm } from '../../Admin/components/dynamicForm/dynamic-form/dynamic-form';
+import { LOGIN_FORM } from '../../config/authformsConfigs/loginFormConfig';
 
 @Component({
   selector: 'app-login',

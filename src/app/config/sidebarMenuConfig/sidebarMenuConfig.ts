@@ -27,8 +27,8 @@ export const SIDEBAR_MENU: SidebarItem[] = [
     icon: 'fas fa-store',
     roles: ['admin'],
     children: [
-      { label: 'Seller List', route: '/admin/seller-list' },
-      { label: 'Add Seller', route: '/admin/seller/add' },
+      { label: 'Seller List', route: 'seller-list' },
+      { label: 'Add Seller', route: 'seller/add' },
     ],
   },
   {
@@ -36,7 +36,7 @@ export const SIDEBAR_MENU: SidebarItem[] = [
     icon: 'fas fa-shopping-cart',
     roles: ['admin'],
     children: [
-      { label: 'Buyer List', route: '/admin/buyer-list' },
+      { label: 'Buyer List', route: 'buyer-list' },
     ],
   },
 ];

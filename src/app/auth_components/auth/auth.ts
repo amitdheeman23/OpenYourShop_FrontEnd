@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Login } from '../login/login';
-import { Footer } from '../../common_components/footer/footer';
+import { Footer } from '../../Admin/components/common_components/footer/footer';
 
 @Component({
   selector: 'app-auth',

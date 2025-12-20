@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FormFactory } from '../../../../services/form_factory/form-factory';
-import { DynamicForm } from '../../dynamicForm/dynamic-form/dynamic-form';
-import { FORGOT_FORM } from '../../../../config/authformsConfigs/forgotFormConfig';
+import { DynamicForm } from '../../Admin/components/dynamicForm/dynamic-form/dynamic-form';
+import { FormFactory } from '../../services/form_factory/form-factory';
+import { LOGIN_FORM } from '../../config/authformsConfigs/loginFormConfig';
 
 @Component({
   selector: 'app-forgot',
@@ -11,7 +11,7 @@ import { FORGOT_FORM } from '../../../../config/authformsConfigs/forgotFormConfi
   styleUrl: './forgot.scss',
 })
 export class Forgot {
-StepConfig = FORGOT_FORM;
+StepConfig = LOGIN_FORM;
   form!: FormGroup;
 
   constructor(private formFactory: FormFactory) {

@@ -1,18 +1,13 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-
     <!-- Brand -->
     <a routerLink="/admin/dashboard" class="brand-link">
         <span class="brand-text font-weight-light">Open Your Shop</span>
     </a>
 
     <div class="sidebar">
-
-        <!-- Menu -->
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column">
-
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @for (item of menu; track item.label) {
-
                 @if (isAllowed(item)) {
 
                 <!-- SINGLE LINK -->
@@ -27,8 +22,8 @@
 
                 <!-- TREE VIEW -->
                 @if (item.children) {
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item" [class.menu-open]="isChildActive(item)">
+                    <a class="nav-link" href="javascript:void(0)">
                         <i class="nav-icon" [class]="item.icon"></i>
                         <p>
                             {{ item.label }}
@@ -51,7 +46,6 @@
 
                 }
                 }
-
             </ul>
         </nav>
     </div>

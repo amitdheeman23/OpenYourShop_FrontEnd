@@ -130,5 +130,49 @@
                 <i class="fas fa-th-large"></i>
             </a>
         </li>
+        <li>
+            <div class="image" (click)="openModal()">
+                <img src="assets/img/user2-160x160.jpg" class="img-circle elevation-2" width="30" alt="User Image">
+            </div>
+        </li>
+
     </ul>
 </nav>
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content card card-primary shadow-lg">
+
+            <!-- 🔹 MODAL HEADER WITH CLOSE ICON -->
+            <div class="modal-header border-0 pb-0">
+                <h5 class="card-header">
+                    {{ action === 'login' ? 'Login' : 'Register' }}
+                </h5>
+
+                <button type="button" class="btn-close" (click)="closeModal()"><i
+                        class="fas fa-times custom-close-icon">
+                    </i>
+                </button>
+            </div>
+
+            <!-- 🔹 MODAL BODY -->
+            <div class="card-body pt-2">
+                <app-dynamic-form [steps]="formConfig" [defaultCol]="12"
+                    (submitForm)="login($event)"></app-dynamic-form>
+            </div>
+
+            <!-- 🔹 MODAL FOOTER -->
+            <div class="card-footer text-center">
+                <a href="javascript:void(0)" (click)="switchAction()">
+                    {{
+                    action === 'login'
+                    ? 'Create new account'
+                    : 'Already have an account'
+                    }}
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
