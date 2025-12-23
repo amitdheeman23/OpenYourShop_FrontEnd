@@ -13,7 +13,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormsFieldsConfig, StepConfig } from '../../../../interfaces/interfaces';
+import { FormsFieldsConfig, StepConfig } from '../../../../interFaces/formsFieldsInterfaces/formsFieldsinterfaces';
 import { FormFactory } from '../../../../services/form_factory/form-factory';
 
 @Component({

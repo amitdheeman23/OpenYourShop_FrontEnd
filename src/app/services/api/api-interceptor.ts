@@ -11,13 +11,15 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const loader = inject(Loader);
 
-  // ================== HEADERS ==================
   const token = localStorage.getItem('token');
   const tenantId = localStorage.getItem('tenantId');
 
-  let headers: Record<string, string> = {
-    'Content-Type': 'application/json',
-  };
+  let headers: Record<string, string> = {};
+
+  // ✅ ONLY set JSON header when body is NOT FormData
+  if (!(req.body instanceof FormData)) {
+    headers['Content-Type'] = 'application/json';
+  }
 
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
@@ -34,7 +36,7 @@ export const apiInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(clonedReq).pipe(
     // ================== TIMEOUT & RETRY ==================
-    timeout(30000),   // 30 sec
+    timeout(30000),
     retry(1),
 
     // ================== ERROR HANDLING ==================

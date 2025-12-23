@@ -4,10 +4,11 @@
             <div class="card shadow">
                 <div class="card-body p-4">
 
-                    <app-dynamic-form [steps]="steps" [defaultCol]="12" (submitForm)="login($event)">
+                    <app-dynamic-form [steps]="formConfig" [defaultCol]="12" (submitForm)="login($event)">
                     </app-dynamic-form>
 
-
+                    <div class="card-footer text-center"> <a href="javascript:void(0)" (click)="switchAction()"> {{
+                            action === 'login' ? 'Create new account' : 'Already have an account' }} </a> </div>
                 </div>
             </div>
         </div>

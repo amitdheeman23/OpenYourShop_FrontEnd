@@ -5,7 +5,7 @@ import {
   FormControl,
   FormGroup,
 } from '@angular/forms';
-import { FormsFieldsConfig, StepConfig } from '../../interfaces/interfaces';
+import { FormsFieldsConfig, StepConfig } from '../../interFaces/formsFieldsInterfaces/formsFieldsinterfaces';
 import { passwordMatchValidator } from '../../config/validators/password-match.validator';
 
 @Injectable({ providedIn: 'root' })

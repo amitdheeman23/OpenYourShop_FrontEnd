@@ -1,5 +1,5 @@
 import { Validators } from '@angular/forms';
-import { StepConfig } from '../../interfaces/interfaces';
+import { StepConfig } from '../../interFaces/formsFieldsInterfaces/formsFieldsinterfaces';
 
 // export const SIGNUP_FORM: StepConfig[] = [
 //   {
